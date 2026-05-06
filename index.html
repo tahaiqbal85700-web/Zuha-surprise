@@ -14,7 +14,7 @@ body{
   height:100vh;
 }
 
-/* PAGE SYSTEM */
+/* PAGES */
 .page{
   display:none;
   position:absolute;
@@ -24,47 +24,49 @@ body{
   left:0;
 }
 
-.active{display:block;}
+.active{
+  display:block;
+}
 
-/* CARD STYLE (VERY IMPORTANT FOR READABILITY) */
+/* CARD */
 .card{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:90%;
-  max-width:700px;
+  width:92%;
+  max-width:720px;
   background:rgba(0,0,0,0.25);
-  padding:25px;
+  padding:40px;
   border-radius:25px;
-  backdrop-filter:blur(6px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  backdrop-filter:blur(8px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.35);
   text-align:center;
 }
 
-/* TEXT */
+/* TEXT (BIG + CLEAR) */
 h1{
-  font-size:42px;
+  font-size:58px;
   font-weight:900;
   margin-bottom:10px;
 }
 
 h2{
-  font-size:32px;
+  font-size:42px;
 }
 
 p{
-  font-size:22px;
-  line-height:1.6;
+  font-size:28px;
+  line-height:1.8;
 }
 
 /* BUTTONS */
 .btn{
-  padding:14px 30px;
-  margin:10px;
+  padding:16px 32px;
+  margin:12px;
   border:none;
-  border-radius:30px;
-  font-size:20px;
+  border-radius:35px;
+  font-size:22px;
   font-weight:bold;
   cursor:pointer;
 }
@@ -72,19 +74,21 @@ p{
 .next{background:#ff4d4d;color:white;}
 .yes{background:#00c853;color:white;}
 
-/* MOVING NO BUTTON */
+/* NO BUTTON (FIXED POSITION CONTROL) */
 .no{
   background:#ff1744;
   color:white;
   position:fixed;
-  z-index:10;
+  left:60%;
+  top:60%;
+  z-index:999;
 }
 
 /* HEARTS */
 .heart{
   position:absolute;
   top:-10px;
-  font-size:24px;
+  font-size:26px;
   animation:fall linear infinite;
   opacity:0.7;
   z-index:0;
@@ -103,7 +107,7 @@ p{
 <div class="page active" id="p1">
   <div class="card">
     <h1>💖 Something Special</h1>
-    <p>A small surprise is waiting just for you…</p>
+    <p>A surprise is waiting just for you…</p>
     <button class="btn next" onclick="go(2)">Next →</button>
   </div>
 </div>
@@ -112,7 +116,7 @@ p{
 <div class="page" id="p2">
   <div class="card">
     <h1>🧸 Welcome Zuha</h1>
-    <p>Answer honestly to continue your surprise</p>
+    <p>Answer honestly</p>
     <h2>Do you love Taha Iqbal?</h2>
 
     <button class="btn yes" onclick="go(3)">Yes 💚</button>
@@ -133,9 +137,9 @@ p{
 <!-- PAGE 4 -->
 <div class="page" id="p4">
   <div class="card">
-    <h2>💌 A Message For You</h2>
+    <h2>💌 Message For You</h2>
 
-    <p style="text-align:left; font-size:18px;">
+    <p style="text-align:left; font-size:22px;">
 
 Syeda Zuha Zaidi,<br><br>
 
@@ -171,22 +175,33 @@ function go(n){
   document.getElementById("p"+n).classList.add("active");
 }
 
-/* NO BUTTON SAFE MOVE */
+/* FIXED NO BUTTON (NEVER DISAPPEARS) */
 const noBtn = document.getElementById("noBtn");
 
 if(noBtn){
+
+  window.addEventListener("load", () => {
+    noBtn.style.left = "60%";
+    noBtn.style.top = "60%";
+  });
+
   noBtn.addEventListener("mouseenter", moveNo);
-}
 
-function moveNo(){
-  const w = noBtn.offsetWidth;
-  const h = noBtn.offsetHeight;
+  function moveNo(){
 
-  const x = Math.random() * (window.innerWidth - w - 20);
-  const y = Math.random() * (window.innerHeight - h - 20);
+    const w = noBtn.offsetWidth;
+    const h = noBtn.offsetHeight;
 
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
+    const maxX = window.innerWidth - w - 20;
+    const maxY = window.innerHeight - h - 20;
+
+    const x = Math.max(20, Math.random() * maxX);
+    const y = Math.max(20, Math.random() * maxY);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    noBtn.style.transform = "none";
+  }
 }
 
 /* HEARTS */
