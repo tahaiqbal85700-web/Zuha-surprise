@@ -14,7 +14,7 @@ body{
   height:100vh;
 }
 
-/* PAGES */
+/* PAGE SYSTEM */
 .page{
   display:none;
   position:absolute;
@@ -28,7 +28,7 @@ body{
   display:block;
 }
 
-/* CARD */
+/* MAIN CARD */
 .card{
   position:absolute;
   top:50%;
@@ -44,7 +44,7 @@ body{
   text-align:center;
 }
 
-/* TEXT (BIG + CLEAR) */
+/* TEXT */
 h1{
   font-size:58px;
   font-weight:900;
@@ -74,13 +74,20 @@ p{
 .next{background:#ff4d4d;color:white;}
 .yes{background:#00c853;color:white;}
 
-/* NO BUTTON (FIXED POSITION CONTROL) */
+/* SAFE AREA FOR PAGE 2 BUTTONS */
+.btn-area{
+  margin-top:40px;
+  height:140px;
+  position:relative;
+}
+
+/* NO BUTTON (ONLY MOVING ELEMENT) */
 .no{
   background:#ff1744;
   color:white;
-  position:fixed;
+  position:absolute;
   left:60%;
-  top:60%;
+  top:40px;
   z-index:999;
 }
 
@@ -107,7 +114,7 @@ p{
 <div class="page active" id="p1">
   <div class="card">
     <h1>💖 Something Special</h1>
-    <p>A surprise is waiting just for you…</p>
+    <p>A surprise made just for you…</p>
     <button class="btn next" onclick="go(2)">Next →</button>
   </div>
 </div>
@@ -117,10 +124,13 @@ p{
   <div class="card">
     <h1>🧸 Welcome Zuha</h1>
     <p>Answer honestly</p>
+
     <h2>Do you love Taha Iqbal?</h2>
 
-    <button class="btn yes" onclick="go(3)">Yes 💚</button>
-    <button class="btn no" id="noBtn">No 💔</button>
+    <div class="btn-area">
+      <button class="btn yes" onclick="go(3)">Yes 💚</button>
+      <button class="btn no" id="noBtn">No 💔</button>
+    </div>
   </div>
 </div>
 
@@ -140,7 +150,6 @@ p{
     <h2>💌 Message For You</h2>
 
     <p style="text-align:left; font-size:22px;">
-
 Syeda Zuha Zaidi,<br><br>
 
 I don’t know how deeply I want the person with this name to always be happy in her life. She is my best friend and will always remain my favourite person. I just want her to keep smiling always. I miss the child behind this beautiful face. I know we don’t talk every day because life keeps us busy, but still, you are and will always be my closest and most special friend.<br><br>
@@ -148,7 +157,6 @@ I don’t know how deeply I want the person with this name to always be happy in
 You and I are a real example of “Ek larka aur larki dost reh sakte hain”. Whenever you need me, I’ll always be there — just a text away, always in the front row for you.<br><br>
 
 I know I hurt you many times, but believe me, that was my stupidity, not intentional. I truly hope you forgive me.
-
     </p>
 
     <button class="btn next" onclick="go(5)">Next →</button>
@@ -175,32 +183,25 @@ function go(n){
   document.getElementById("p"+n).classList.add("active");
 }
 
-/* FIXED NO BUTTON (NEVER DISAPPEARS) */
+/* FIXED NO BUTTON LOGIC (NO OVERLAP + NO VANISH) */
 const noBtn = document.getElementById("noBtn");
 
 if(noBtn){
 
-  window.addEventListener("load", () => {
-    noBtn.style.left = "60%";
-    noBtn.style.top = "60%";
-  });
+  const area = document.querySelector(".btn-area");
 
   noBtn.addEventListener("mouseenter", moveNo);
 
   function moveNo(){
 
-    const w = noBtn.offsetWidth;
-    const h = noBtn.offsetHeight;
+    const maxX = area.offsetWidth - noBtn.offsetWidth;
+    const maxY = area.offsetHeight - noBtn.offsetHeight;
 
-    const maxX = window.innerWidth - w - 20;
-    const maxY = window.innerHeight - h - 20;
-
-    const x = Math.max(20, Math.random() * maxX);
-    const y = Math.max(20, Math.random() * maxY);
+    const x = Math.max(0, Math.random() * maxX);
+    const y = Math.max(0, Math.random() * maxY);
 
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
-    noBtn.style.transform = "none";
   }
 }
 
