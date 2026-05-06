@@ -1,1 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Zuha Surprise</title>
 
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#ff4da6;
+  color:white;
+  text-align:center;
+  overflow:hidden;
+}
+
+.page{
+  display:none;
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+}
+
+.active{display:block;}
+
+.center{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:90%;
+}
+
+.btn{
+  padding:12px 25px;
+  margin:10px;
+  border:none;
+  border-radius:25px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+.next{background:#ff6666;color:white;}
+.yes{background:green;color:white;}
+.no{background:red;color:white;position:absolute;}
+
+.heart{
+  position:absolute;
+  top:-10px;
+  font-size:20px;
+  animation:fall linear infinite;
+  opacity:0.8;
+  z-index:0;
+}
+
+@keyframes fall{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(110vh);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <div class="center">
+    <h1>Something Special Is Waiting for You</h1>
+    <button class="btn next" onclick="go(2)">Next →</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <div class="center">
+    <h1>🧸 Welcome Zuha</h1>
+    <p>If you want your surprise just answer the question</p>
+    <h2>Do you love Taha Iqbal?</h2>
+
+    <button class="btn yes" onclick="go(3)">Yes</button>
+    <button class="btn no" id="noBtn">No</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <div class="center">
+    <h1>🎉 Yaaahhoooooo! 🎉</h1>
+    <p>I knew it 😘💖<br>Love you too my love 🥰💋</p>
+    <button class="btn next" onclick="go(4)">Next →</button>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+  <div class="center">
+    <p style="font-size:15px; line-height:1.6;">
+
+Syeda Zuha Zaidi,<br><br>
+
+I don’t know how deeply I want the person with this name to always be happy in her life. She is my best friend and will always remain my favourite person. I just want her to keep smiling always. I miss the child behind this beautiful face. I know we don’t talk every day because life keeps us busy, but still, you are and will always be my closest and most special friend.<br><br>
+
+You and I are a real example of “Ek larka aur larki dost reh sakte hain”. Whenever you need me, I’ll always be there — just a text away, always in the front row for you.<br><br>
+
+I know I hurt you many times, but believe me, that was my stupidity, not intentional. I truly hope you forgive me.
+
+    </p>
+
+    <button class="btn next" onclick="go(5)">Next →</button>
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+  <div class="center">
+    <h2>Your gift is waiting for you 🎁</h2>
+    <p>Check my chat</p>
+    <br>
+    <h3>Goodbye ❤️</h3>
+  </div>
+</div>
+
+<script>
+function go(n){
+  for(let i=1;i<=5;i++){
+    document.getElementById("p"+i).classList.remove("active");
+  }
+  document.getElementById("p"+n).classList.add("active");
+}
+
+const noBtn = document.getElementById("noBtn");
+if(noBtn){
+  noBtn.addEventListener("mouseover", ()=>{
+    noBtn.style.left = Math.random()*(window.innerWidth-100)+"px";
+    noBtn.style.top = Math.random()*(window.innerHeight-100)+"px";
+  });
+}
+
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.classList.add("heart");
+  h.innerHTML=Math.random()>0.5?"❤️":"✨";
+  h.style.left=Math.random()*window.innerWidth+"px";
+  h.style.animationDuration=(3+Math.random()*3)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},250);
+</script>
+
+</body>
+</html>
