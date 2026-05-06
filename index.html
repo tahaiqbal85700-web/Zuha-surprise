@@ -8,12 +8,16 @@
 body{
   margin:0;
   font-family:Arial;
-  background:#ff4da6;
+  background:linear-gradient(135deg,#ff4da6,#ff1a75);
   color:white;
   text-align:center;
   overflow:hidden;
+  position:fixed;
+  width:100%;
+  height:100%;
 }
 
+/* Pages */
 .page{
   display:none;
   position:absolute;
@@ -23,35 +27,67 @@ body{
   left:0;
 }
 
-.active{display:block;}
+.active{
+  display:block;
+}
 
+/* Center stable content */
 .center{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
   width:90%;
+  max-width:700px;
+  padding:20px;
 }
 
+/* Text styling */
+h1{
+  font-size:38px;
+  font-weight:800;
+}
+
+h2{
+  font-size:28px;
+}
+
+p{
+  font-size:20px;
+  line-height:1.6;
+}
+
+/* Buttons */
 .btn{
-  padding:12px 25px;
+  padding:14px 28px;
   margin:10px;
   border:none;
-  border-radius:25px;
-  font-size:18px;
+  border-radius:30px;
+  font-size:20px;
+  font-weight:bold;
   cursor:pointer;
 }
 
 .next{background:#ff6666;color:white;}
-.yes{background:green;color:white;}
-.no{background:red;color:white;position:absolute;}
+.yes{background:#00c853;color:white;}
 
+/* NO button (ONLY moving element) */
+.no{
+  background:#ff1744;
+  color:white;
+  position:fixed;
+  top:auto;
+  left:auto;
+  z-index:5;
+}
+
+/* Hearts */
 .heart{
   position:absolute;
   top:-10px;
   font-size:20px;
   animation:fall linear infinite;
-  opacity:0.8;
+  opacity:0.7;
   z-index:0;
 }
 
@@ -67,7 +103,7 @@ body{
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
   <div class="center">
-    <h1>Something Special Is Waiting for You</h1>
+    <h1>Something Special Is Waiting for You 💖</h1>
     <button class="btn next" onclick="go(2)">Next →</button>
   </div>
 </div>
@@ -76,19 +112,20 @@ body{
 <div class="page" id="p2">
   <div class="center">
     <h1>🧸 Welcome Zuha</h1>
-    <p>If you want your surprise just answer the question</p>
+    <p>If you want your surprise just answer honestly</p>
     <h2>Do you love Taha Iqbal?</h2>
 
-    <button class="btn yes" onclick="go(3)">Yes</button>
-    <button class="btn no" id="noBtn">No</button>
+    <button class="btn yes" onclick="go(3)">Yes 💚</button>
+    <button class="btn no" id="noBtn">No 💔</button>
   </div>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
   <div class="center">
-    <h1>🎉 Yaaahhoooooo! 🎉</h1>
-    <p>I knew it 😘💖<br>Love you too my love 🥰💋</p>
+    <h1>🎉 YAAAHHOOOOO! 🎉</h1>
+    <p>I knew it 😘💖</p>
+    <p>Love you too my love 🥰💋❤️</p>
     <button class="btn next" onclick="go(4)">Next →</button>
   </div>
 </div>
@@ -96,7 +133,7 @@ body{
 <!-- PAGE 4 -->
 <div class="page" id="p4">
   <div class="center">
-    <p style="font-size:15px; line-height:1.6;">
+    <p style="font-size:18px; text-align:left;">
 
 Syeda Zuha Zaidi,<br><br>
 
@@ -115,14 +152,15 @@ I know I hurt you many times, but believe me, that was my stupidity, not intenti
 <!-- PAGE 5 -->
 <div class="page" id="p5">
   <div class="center">
-    <h2>Your gift is waiting for you 🎁</h2>
-    <p>Check my chat</p>
-    <br>
-    <h3>Goodbye ❤️</h3>
+    <h1>🎁 Your Gift Is Waiting</h1>
+    <p>Check my chat 💬</p>
+    <h2>Goodbye ❤️</h2>
   </div>
 </div>
 
 <script>
+
+/* PAGE SWITCH */
 function go(n){
   for(let i=1;i<=5;i++){
     document.getElementById("p"+i).classList.remove("active");
@@ -130,14 +168,27 @@ function go(n){
   document.getElementById("p"+n).classList.add("active");
 }
 
+/* NO BUTTON FIXED MOVEMENT (NEVER DISAPPEARS) */
 const noBtn = document.getElementById("noBtn");
+
 if(noBtn){
-  noBtn.addEventListener("mouseover", ()=>{
-    noBtn.style.left = Math.random()*(window.innerWidth-100)+"px";
-    noBtn.style.top = Math.random()*(window.innerHeight-100)+"px";
-  });
+  noBtn.addEventListener("mouseover", moveNo);
 }
 
+function moveNo(){
+  const padding = 100;
+
+  const maxX = window.innerWidth - padding;
+  const maxY = window.innerHeight - padding;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+/* HEARTS + SPARKS */
 setInterval(()=>{
   const h=document.createElement("div");
   h.classList.add("heart");
@@ -146,7 +197,8 @@ setInterval(()=>{
   h.style.animationDuration=(3+Math.random()*3)+"s";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
-},250);
+},200);
+
 </script>
 
 </body>
