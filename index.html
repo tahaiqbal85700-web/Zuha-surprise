@@ -5,17 +5,22 @@
 <title>Happy Birthday Zuha 🎉</title>
 
 <style>
+/* =========================
+   DEEP CINEMATIC BACKGROUND
+========================= */
 body {
     margin: 0;
     overflow: hidden;
     font-family: 'Segoe UI', sans-serif;
 
-    /* DARKER, MORE ROMANTIC BACKGROUND */
-    background: radial-gradient(circle at top, #ff2b6a, #5a001f);
+    /* FIX: NO WHITE, PURE DARK ROMANTIC GRADIENT */
+    background: radial-gradient(circle at top, #2b0013, #000000);
     color: white;
 }
 
-/* PAGE */
+/* =========================
+   PAGE SYSTEM
+========================= */
 .page {
     position: absolute;
     width: 100%;
@@ -25,79 +30,119 @@ body {
     align-items: center;
     flex-direction: column;
     text-align: center;
-    padding: 20px;
+    padding: 25px;
 }
 
-.page.active { display: flex; }
+.page.active {
+    display: flex;
+}
 
-/* TEDDY */
+/* =========================
+   TEDDY (BIG + FLOATING)
+========================= */
 .teddy {
-    font-size: 95px;   /* BIGGER */
+    font-size: 110px;
     animation: float 2.5s ease-in-out infinite;
     margin-bottom: 10px;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
 }
 
 @keyframes float {
     0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+    50% { transform: translateY(-18px); }
 }
-
-/* TEXT BOX (LARGER TEXT) */
-.box {
-    background: rgba(0,0,0,0.65);
-    padding: 30px 35px;
-    border-radius: 20px;
-    max-width: 85%;
-
-    /* 🔥 FIX: BIGGER TEXT */
-    font-size: 28px;
-    line-height: 1.8;
-
-    backdrop-filter: blur(10px);
-}
-
-/* BUTTONS */
-.btn {
-    padding: 14px 30px;
-    margin: 12px;
-    font-size: 20px;
-    border: none;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.yes { background: #22c55e; color: white; }
-.no { background: #ef4444; color: white; }
-.next { background: #3b82f6; color: white; }
-
-.btn:active { transform: scale(0.9); }
 
 /* =========================
-   FALLING EFFECTS (FIXED SIZE)
+   TEXT BOX (BIGGER + MORE PREMIUM)
 ========================= */
+.box {
+    background: rgba(0,0,0,0.72);
+    padding: 35px 40px;
+    border-radius: 22px;
+    max-width: 85%;
 
-.heart, .sparkle {
+    /* 🔥 BIG TEXT FIX */
+    font-size: 34px;
+    line-height: 1.9;
+
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 25px rgba(255,0,90,0.2);
+}
+
+/* =========================
+   BUTTONS (FIXED BIG UI)
+========================= */
+.btn {
+    padding: 18px 40px;
+    margin: 14px;
+    font-size: 24px;   /* 🔥 BIGGER */
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: 0.25s;
+    font-weight: bold;
+}
+
+.yes {
+    background: linear-gradient(45deg,#22c55e,#16a34a);
+    color: white;
+}
+
+.no {
+    background: linear-gradient(45deg,#ef4444,#b91c1c);
+    color: white;
+}
+
+.next {
+    background: linear-gradient(45deg,#3b82f6,#1d4ed8);
+    color: white;
+}
+
+.btn:active {
+    transform: scale(0.9);
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* =========================
+   FALLING EFFECTS (HEART + SPARK + DIAMOND + STAR)
+========================= */
+.heart, .sparkle, .diamond, .star {
     position: absolute;
     top: -20px;
     pointer-events: none;
+    animation: fall linear infinite;
 }
 
-/* 🔥 BIGGER HEARTS */
+/* HEART */
 .heart {
-    color: #ff0033;
-    font-size: 30px;   /* increased */
-    text-shadow: 0 0 8px rgba(255,0,80,0.7);
-    animation: fall linear infinite;
+    font-size: 34px;
+    color: #ff004c;
+    text-shadow: 0 0 10px rgba(255,0,80,0.7);
 }
 
-/* 🔥 BIGGER SPARKLES */
+/* SPARKLE */
 .sparkle {
-    color: #ffffff;
-    font-size: 22px;   /* increased */
+    font-size: 26px;
+    color: white;
     opacity: 0.9;
-    text-shadow: 0 0 10px white;
-    animation: fall linear infinite;
+}
+
+/* DIAMOND */
+.diamond {
+    font-size: 28px;
+    color: #7dd3fc;
+    text-shadow: 0 0 12px #38bdf8;
+}
+
+/* STAR */
+.star {
+    font-size: 30px;
+    color: #fde047;
+    text-shadow: 0 0 12px #facc15;
 }
 
 @keyframes fall {
@@ -156,103 +201,104 @@ canvas {
 
 <script>
 
-/* TYPEWRITER */
-function type(id,text,speed=18){
-    let i=0;
-    function run(){
-        if(i<text.length){
-            document.getElementById(id).innerHTML+=text.charAt(i);
-            i++;
-            setTimeout(run,speed);
-        }
-    }
-    run();
+/* TEXT */
+function type(id,text,speed=16){
+let i=0;
+function run(){
+if(i<text.length){
+document.getElementById(id).innerHTML+=text.charAt(i);
+i++;
+setTimeout(run,speed);
+}
+}
+run();
 }
 
-/* TEXT */
-type("t1",
-`Happy Birthday, Zuha 🎉
+/* CONTENT */
+type("t1",`Happy Birthday, Zuha 🎉
 May you have a great day.
 
 Taha wants to tell you something special.
 Do you want to see it?`);
 
-type("t2",
-`Before moving to the surprise, answer a simple question:
+type("t2",`Before moving to the surprise, answer a simple question:
 
 Do you love Taha Iqbal?`);
 
-type("t3",
-`Yaahooooooo! 🎉
+type("t3",`Yaahooooooo! 🎉
 I knew it!
 Love you too, baby 😚💋`);
 
-type("t4",
-`Syeda Zuha Zaidi, my first female friend in the whole university.
+type("t4",`Syeda Zuha Zaidi, my first female friend in the whole university.
 
 She is still my best friend.
 
-No one has the right to take her place in my life because she has been loyal to me from day one.
+No one can replace her in my life because she has been loyal from day one.
 
 I consider her the most courageous girl I have ever met.
 
-Even though we are busy, our bond is still strong.
+Even when life is busy, our bond is still strong.
 
 I want you to be my friend till my last breath.
 
 Thank you a lot for being my friend. I always thank God that He gave me such a kind, caring, and beautiful friend like you.
 
-Time for the surprise. Go and check my chat ❤️`);
+Go check your surprise ❤️`);
 
-/* NAVIGATION */
+/* NAV */
 function show(id){
-    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
-    if(id==="p3") burst();
-    if(id==="p4") burst();
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+if(id==="p3") burst();
+if(id==="p4") burst();
 }
 
 /* BUTTON LOGIC */
-let n1=20,y1=20;
+let n1=26,y1=26;
 document.getElementById("p1yes").onclick=()=>show("p2");
 
 document.getElementById("p1no").onclick=()=>{
-    n1-=2; y1+=3;
-    document.getElementById("p1no").style.fontSize=n1+"px";
-    document.getElementById("p1yes").style.fontSize=y1+"px";
+n1-=2; y1+=3;
+document.getElementById("p1no").style.fontSize=n1+"px";
+document.getElementById("p1yes").style.fontSize=y1+"px";
 };
 
-let n2=20,y2=20;
+let n2=26,y2=26;
 document.getElementById("p2yes").onclick=()=>show("p3");
 
 document.getElementById("p2no").onclick=()=>{
-    n2-=2; y2+=3;
-    document.getElementById("p2no").style.fontSize=n2+"px";
-    document.getElementById("p2yes").style.fontSize=y2+"px";
+n2-=2; y2+=3;
+document.getElementById("p2no").style.fontSize=n2+"px";
+document.getElementById("p2yes").style.fontSize=y2+"px";
 };
 
 document.getElementById("next").onclick=()=>show("p4");
 
-/* FALLING HEARTS (BIGGER + SLOWER + NICER) */
+/* MULTI EFFECT GENERATOR */
 function create(){
-    const e=document.createElement("div");
+const e=document.createElement("div");
+const r=Math.random();
 
-    const r=Math.random();
-    if(r<0.6){
-        e.className="heart";
-        e.innerHTML="❤";
-    } else {
-        e.className="sparkle";
-        e.innerHTML="✦";
-    }
-
-    e.style.left=Math.random()*100+"vw";
-    e.style.animationDuration=(4+Math.random()*3)+"s";
-
-    document.body.appendChild(e);
-    setTimeout(()=>e.remove(),7000);
+if(r<0.25){
+e.className="heart"; e.innerHTML="❤";
 }
-setInterval(create,150);
+else if(r<0.5){
+e.className="sparkle"; e.innerHTML="✨";
+}
+else if(r<0.75){
+e.className="diamond"; e.innerHTML="💎";
+}
+else{
+e.className="star"; e.innerHTML="🌟";
+}
+
+e.style.left=Math.random()*100+"vw";
+e.style.animationDuration=(4+Math.random()*3)+"s";
+
+document.body.appendChild(e);
+setTimeout(()=>e.remove(),8000);
+}
+setInterval(create,120);
 
 /* CONFETTI */
 const canvas=document.getElementById("confetti");
@@ -263,32 +309,31 @@ canvas.height=innerHeight;
 let pieces=[];
 
 function burst(){
-    for(let i=0;i<150;i++){
-        pieces.push({
-            x:canvas.width/2,
-            y:canvas.height/2,
-            vx:(Math.random()-0.5)*10,
-            vy:(Math.random()-0.5)*10,
-            a:1
-        });
-    }
+for(let i=0;i<180;i++){
+pieces.push({
+x:canvas.width/2,
+y:canvas.height/2,
+vx:(Math.random()-0.5)*12,
+vy:(Math.random()-0.5)*12,
+a:1
+});
+}
 }
 
 function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    pieces.forEach(p=>{
-        ctx.fillStyle="rgba(255,255,255,"+p.a+")";
-        ctx.fillRect(p.x,p.y,5,5);
-        p.x+=p.vx;
-        p.y+=p.vy;
-        p.a-=0.008;
-    });
-    pieces=pieces.filter(p=>p.a>0);
-    requestAnimationFrame(draw);
+ctx.clearRect(0,0,canvas.width,canvas.height);
+pieces.forEach(p=>{
+ctx.fillStyle="rgba(255,255,255,"+p.a+")";
+ctx.fillRect(p.x,p.y,5,5);
+p.x+=p.vx;
+p.y+=p.vy;
+p.a-=0.008;
+});
+pieces=pieces.filter(p=>p.a>0);
+requestAnimationFrame(draw);
 }
 draw();
 
 </script>
-
 </body>
 </html>
