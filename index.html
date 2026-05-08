@@ -5,22 +5,22 @@
 <title>Happy Birthday Zuha 🎉</title>
 
 <style>
-/* =========================
-   DEEP CINEMATIC BACKGROUND
-========================= */
+/* =======================
+   GLOBAL BACKGROUND
+======================= */
 body {
     margin: 0;
     overflow: hidden;
     font-family: 'Segoe UI', sans-serif;
 
-    /* FIX: NO WHITE, PURE DARK ROMANTIC GRADIENT */
-    background: radial-gradient(circle at top, #2b0013, #000000);
+    /* DARK ROMANTIC THEME */
+    background: radial-gradient(circle at top, #2a0014, #000000);
     color: white;
 }
 
-/* =========================
+/* =======================
    PAGE SYSTEM
-========================= */
+======================= */
 .page {
     position: absolute;
     width: 100%;
@@ -30,56 +30,53 @@ body {
     align-items: center;
     flex-direction: column;
     text-align: center;
-    padding: 25px;
+    padding: 20px;
 }
 
 .page.active {
     display: flex;
 }
 
-/* =========================
-   TEDDY (BIG + FLOATING)
-========================= */
+/* =======================
+   TEDDY
+======================= */
 .teddy {
-    font-size: 110px;
+    font-size: 100px;
     animation: float 2.5s ease-in-out infinite;
     margin-bottom: 10px;
-    filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
 }
 
 @keyframes float {
     0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-18px); }
+    50% { transform: translateY(-15px); }
 }
 
-/* =========================
-   TEXT BOX (BIGGER + MORE PREMIUM)
-========================= */
+/* =======================
+   TEXT BOX (BIG & CLEAR)
+======================= */
 .box {
-    background: rgba(0,0,0,0.72);
+    background: rgba(0,0,0,0.75);
     padding: 35px 40px;
     border-radius: 22px;
     max-width: 85%;
 
-    /* 🔥 BIG TEXT FIX */
-    font-size: 34px;
-    line-height: 1.9;
+    font-size: 32px;   /* BIG TEXT FIX */
+    line-height: 1.8;
 
-    backdrop-filter: blur(12px);
-    box-shadow: 0 0 25px rgba(255,0,90,0.2);
+    backdrop-filter: blur(10px);
 }
 
-/* =========================
-   BUTTONS (FIXED BIG UI)
-========================= */
+/* =======================
+   BUTTONS (LARGE & PREMIUM)
+======================= */
 .btn {
     padding: 18px 40px;
     margin: 14px;
-    font-size: 24px;   /* 🔥 BIGGER */
+    font-size: 24px;
     border: none;
     border-radius: 16px;
     cursor: pointer;
-    transition: 0.25s;
+    transition: 0.2s;
     font-weight: bold;
 }
 
@@ -104,12 +101,11 @@ body {
 
 .btn:hover {
     transform: scale(1.05);
-    filter: brightness(1.1);
 }
 
-/* =========================
-   FALLING EFFECTS (HEART + SPARK + DIAMOND + STAR)
-========================= */
+/* =======================
+   FALLING EFFECTS (CONTROLLED)
+======================= */
 .heart, .sparkle, .diamond, .star {
     position: absolute;
     top: -20px;
@@ -119,35 +115,33 @@ body {
 
 /* HEART */
 .heart {
-    font-size: 34px;
+    font-size: 32px;
     color: #ff004c;
-    text-shadow: 0 0 10px rgba(255,0,80,0.7);
 }
 
 /* SPARKLE */
 .sparkle {
-    font-size: 26px;
+    font-size: 24px;
     color: white;
-    opacity: 0.9;
 }
 
 /* DIAMOND */
 .diamond {
-    font-size: 28px;
+    font-size: 26px;
     color: #7dd3fc;
-    text-shadow: 0 0 12px #38bdf8;
+    text-shadow: 0 0 10px #38bdf8;
 }
 
 /* STAR */
 .star {
-    font-size: 30px;
+    font-size: 28px;
     color: #fde047;
-    text-shadow: 0 0 12px #facc15;
+    text-shadow: 0 0 10px #facc15;
 }
 
 @keyframes fall {
-    0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    0% { transform: translateY(-20px); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
 }
 
 /* CONFETTI */
@@ -201,7 +195,7 @@ canvas {
 
 <script>
 
-/* TEXT */
+/* TYPEWRITER */
 function type(id,text,speed=16){
 let i=0;
 function run(){
@@ -214,7 +208,7 @@ setTimeout(run,speed);
 run();
 }
 
-/* CONTENT */
+/* TEXT CONTENT */
 type("t1",`Happy Birthday, Zuha 🎉
 May you have a great day.
 
@@ -243,9 +237,9 @@ I want you to be my friend till my last breath.
 
 Thank you a lot for being my friend. I always thank God that He gave me such a kind, caring, and beautiful friend like you.
 
-Go check your surprise ❤️`);
+Go check my WhatsApp chat ❤️`);
 
-/* NAV */
+/* NAVIGATION */
 function show(id){
 document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
 document.getElementById(id).classList.add("active");
@@ -272,20 +266,18 @@ document.getElementById("p2no").style.fontSize=n2+"px";
 document.getElementById("p2yes").style.fontSize=y2+"px";
 };
 
-document.getElementById("next").onclick=()=>show("p4");
-
-/* MULTI EFFECT GENERATOR */
+/* CONTROLLED EFFECT GENERATOR */
 function create(){
 const e=document.createElement("div");
 const r=Math.random();
 
-if(r<0.25){
+if(r<0.4){
 e.className="heart"; e.innerHTML="❤";
 }
-else if(r<0.5){
+else if(r<0.65){
 e.className="sparkle"; e.innerHTML="✨";
 }
-else if(r<0.75){
+else if(r<0.85){
 e.className="diamond"; e.innerHTML="💎";
 }
 else{
@@ -293,12 +285,14 @@ e.className="star"; e.innerHTML="🌟";
 }
 
 e.style.left=Math.random()*100+"vw";
-e.style.animationDuration=(4+Math.random()*3)+"s";
+e.style.animationDuration=(5+Math.random()*3)+"s";
 
 document.body.appendChild(e);
-setTimeout(()=>e.remove(),8000);
+setTimeout(()=>e.remove(),9000);
 }
-setInterval(create,120);
+
+/* 🔥 REDUCED DENSITY (IMPORTANT FIX) */
+setInterval(create, 250);
 
 /* CONFETTI */
 const canvas=document.getElementById("confetti");
@@ -309,12 +303,12 @@ canvas.height=innerHeight;
 let pieces=[];
 
 function burst(){
-for(let i=0;i<180;i++){
+for(let i=0;i<160;i++){
 pieces.push({
 x:canvas.width/2,
 y:canvas.height/2,
-vx:(Math.random()-0.5)*12,
-vy:(Math.random()-0.5)*12,
+vx:(Math.random()-0.5)*10,
+vy:(Math.random()-0.5)*10,
 a:1
 });
 }
@@ -335,5 +329,6 @@ requestAnimationFrame(draw);
 draw();
 
 </script>
+
 </body>
 </html>
