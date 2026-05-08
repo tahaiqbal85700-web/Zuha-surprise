@@ -9,11 +9,13 @@ body {
     margin: 0;
     overflow: hidden;
     font-family: 'Segoe UI', sans-serif;
-    background: radial-gradient(circle, #ff2e7a, #b30059);
+
+    /* DARKER, MORE ROMANTIC BACKGROUND */
+    background: radial-gradient(circle at top, #ff2b6a, #5a001f);
     color: white;
 }
 
-/* Pages */
+/* PAGE */
 .page {
     position: absolute;
     width: 100%;
@@ -23,81 +25,87 @@ body {
     align-items: center;
     flex-direction: column;
     text-align: center;
+    padding: 20px;
 }
 
 .page.active { display: flex; }
 
-/* Teddy */
+/* TEDDY */
 .teddy {
-    font-size: 75px;
-    animation: float 2s infinite ease-in-out;
+    font-size: 95px;   /* BIGGER */
+    animation: float 2.5s ease-in-out infinite;
+    margin-bottom: 10px;
 }
+
 @keyframes float {
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-12px);}
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
 }
 
-/* Box */
+/* TEXT BOX (LARGER TEXT) */
 .box {
-    background: rgba(0,0,0,0.55);
-    padding: 25px;
-    border-radius: 18px;
+    background: rgba(0,0,0,0.65);
+    padding: 30px 35px;
+    border-radius: 20px;
     max-width: 85%;
-    font-size: 22px;
-    line-height: 1.6;
-    backdrop-filter: blur(8px);
+
+    /* 🔥 FIX: BIGGER TEXT */
+    font-size: 28px;
+    line-height: 1.8;
+
+    backdrop-filter: blur(10px);
 }
 
-/* Buttons */
+/* BUTTONS */
 .btn {
-    padding: 12px 26px;
-    margin: 10px;
-    font-size: 18px;
+    padding: 14px 30px;
+    margin: 12px;
+    font-size: 20px;
     border: none;
-    border-radius: 12px;
+    border-radius: 14px;
     cursor: pointer;
     transition: 0.2s;
 }
+
 .yes { background: #22c55e; color: white; }
 .no { background: #ef4444; color: white; }
 .next { background: #3b82f6; color: white; }
 
 .btn:active { transform: scale(0.9); }
 
-/* Floating effects */
-.heart, .sparkle, .glow {
+/* =========================
+   FALLING EFFECTS (FIXED SIZE)
+========================= */
+
+.heart, .sparkle {
     position: absolute;
-    top: -10px;
+    top: -20px;
     pointer-events: none;
 }
 
+/* 🔥 BIGGER HEARTS */
 .heart {
-    color: #ff004c;
-    font-size: 18px;
-    animation: fall 4s linear infinite;
+    color: #ff0033;
+    font-size: 30px;   /* increased */
+    text-shadow: 0 0 8px rgba(255,0,80,0.7);
+    animation: fall linear infinite;
 }
 
+/* 🔥 BIGGER SPARKLES */
 .sparkle {
-    color: white;
-    font-size: 10px;
-    animation: fall 5s linear infinite;
-}
-
-.glow {
-    width: 6px;
-    height: 6px;
-    background: white;
-    border-radius: 50%;
-    animation: fall 6s linear infinite;
-    opacity: 0.6;
+    color: #ffffff;
+    font-size: 22px;   /* increased */
+    opacity: 0.9;
+    text-shadow: 0 0 10px white;
+    animation: fall linear infinite;
 }
 
 @keyframes fall {
-    0% { transform: translateY(-10px); opacity: 1; }
-    100% { transform: translateY(100vh); opacity: 0; }
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
-/* Confetti canvas */
+/* CONFETTI */
 canvas {
     position: absolute;
     top: 0;
@@ -110,11 +118,6 @@ canvas {
 <body>
 
 <canvas id="confetti"></canvas>
-
-<!-- MUSIC -->
-<audio id="bgm" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a1f7b5.mp3?filename=romantic-music-ambient-110397.mp3">
-</audio>
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
@@ -153,43 +156,38 @@ canvas {
 
 <script>
 
-/* ================= MUSIC START ================= */
-window.addEventListener("click", () => {
-    document.getElementById("bgm").play();
-}, { once: true });
-
-/* ================= TYPEWRITER ================= */
-function typeText(id, text, speed=20){
+/* TYPEWRITER */
+function type(id,text,speed=18){
     let i=0;
     function run(){
         if(i<text.length){
-            document.getElementById(id).innerHTML += text.charAt(i);
+            document.getElementById(id).innerHTML+=text.charAt(i);
             i++;
-            setTimeout(run, speed);
+            setTimeout(run,speed);
         }
     }
     run();
 }
 
-/* PAGE TEXTS */
-typeText("t1",
+/* TEXT */
+type("t1",
 `Happy Birthday, Zuha 🎉
 May you have a great day.
 
 Taha wants to tell you something special.
 Do you want to see it?`);
 
-typeText("t2",
+type("t2",
 `Before moving to the surprise, answer a simple question:
 
 Do you love Taha Iqbal?`);
 
-typeText("t3",
+type("t3",
 `Yaahooooooo! 🎉
 I knew it!
 Love you too, baby 😚💋`);
 
-typeText("t4",
+type("t4",
 `Syeda Zuha Zaidi, my first female friend in the whole university.
 
 She is still my best friend.
@@ -198,77 +196,80 @@ No one has the right to take her place in my life because she has been loyal to 
 
 I consider her the most courageous girl I have ever met.
 
-We may be busy, but our bond is still strong.
+Even though we are busy, our bond is still strong.
 
 I want you to be my friend till my last breath.
 
-Thank you a lot for being my friend. I always thank God that He gave me a kind, caring, and beautiful friend like you.
+Thank you a lot for being my friend. I always thank God that He gave me such a kind, caring, and beautiful friend like you.
 
 Time for the surprise. Go and check my chat ❤️`);
 
-/* ================= PAGE NAV ================= */
+/* NAVIGATION */
 function show(id){
     document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
     document.getElementById(id).classList.add("active");
-
     if(id==="p3") burst();
     if(id==="p4") burst();
 }
 
-/* ================= BUTTON LOGIC ================= */
-let no1=18, yes1=18;
+/* BUTTON LOGIC */
+let n1=20,y1=20;
 document.getElementById("p1yes").onclick=()=>show("p2");
 
 document.getElementById("p1no").onclick=()=>{
-    no1-=2; yes1+=3;
-    document.getElementById("p1no").style.fontSize=no1+"px";
-    document.getElementById("p1yes").style.fontSize=yes1+"px";
+    n1-=2; y1+=3;
+    document.getElementById("p1no").style.fontSize=n1+"px";
+    document.getElementById("p1yes").style.fontSize=y1+"px";
 };
 
-let no2=18, yes2=18;
+let n2=20,y2=20;
 document.getElementById("p2yes").onclick=()=>show("p3");
 
 document.getElementById("p2no").onclick=()=>{
-    no2-=2; yes2+=3;
-    document.getElementById("p2no").style.fontSize=no2+"px";
-    document.getElementById("p2yes").style.fontSize=yes2+"px";
+    n2-=2; y2+=3;
+    document.getElementById("p2no").style.fontSize=n2+"px";
+    document.getElementById("p2yes").style.fontSize=y2+"px";
 };
 
 document.getElementById("next").onclick=()=>show("p4");
 
-/* ================= FLOATING EFFECTS ================= */
+/* FALLING HEARTS (BIGGER + SLOWER + NICER) */
 function create(){
     const e=document.createElement("div");
-    const type=Math.random();
-    if(type<0.4) e.className="heart";
-    else if(type<0.7) e.className="sparkle";
-    else e.className="glow";
 
-    e.innerHTML= type<0.4?"❤":"✦";
+    const r=Math.random();
+    if(r<0.6){
+        e.className="heart";
+        e.innerHTML="❤";
+    } else {
+        e.className="sparkle";
+        e.innerHTML="✦";
+    }
+
     e.style.left=Math.random()*100+"vw";
-    e.style.animationDuration=(3+Math.random()*3)+"s";
+    e.style.animationDuration=(4+Math.random()*3)+"s";
 
     document.body.appendChild(e);
-    setTimeout(()=>e.remove(),6000);
+    setTimeout(()=>e.remove(),7000);
 }
-setInterval(create,200);
+setInterval(create,150);
 
-/* ================= CONFETTI ================= */
+/* CONFETTI */
 const canvas=document.getElementById("confetti");
 const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+canvas.width=innerWidth;
+canvas.height=innerHeight;
 
 let pieces=[];
 
 function burst(){
-    for(let i=0;i<120;i++){
+    for(let i=0;i<150;i++){
         pieces.push({
             x:canvas.width/2,
             y:canvas.height/2,
-            vx:(Math.random()-0.5)*8,
-            vy:(Math.random()-0.5)*8,
-            alpha:1
+            vx:(Math.random()-0.5)*10,
+            vy:(Math.random()-0.5)*10,
+            a:1
         });
     }
 }
@@ -276,17 +277,18 @@ function burst(){
 function draw(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     pieces.forEach(p=>{
-        ctx.fillStyle="rgba(255,255,255,"+p.alpha+")";
-        ctx.fillRect(p.x,p.y,4,4);
+        ctx.fillStyle="rgba(255,255,255,"+p.a+")";
+        ctx.fillRect(p.x,p.y,5,5);
         p.x+=p.vx;
         p.y+=p.vy;
-        p.alpha-=0.01;
+        p.a-=0.008;
     });
-    pieces=pieces.filter(p=>p.alpha>0);
+    pieces=pieces.filter(p=>p.a>0);
     requestAnimationFrame(draw);
 }
 draw();
 
 </script>
+
 </body>
 </html>
