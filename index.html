@@ -13,7 +13,7 @@ body {
     color: white;
 }
 
-/* PAGES */
+/* PAGE SYSTEM */
 .page {
     position: absolute;
     width: 100%;
@@ -26,7 +26,9 @@ body {
     padding: 20px;
 }
 
-.page.active { display: flex; }
+.page.active {
+    display: flex;
+}
 
 /* TEDDY */
 .teddy {
@@ -130,10 +132,9 @@ canvas {
     <button class="btn next" id="next">Next →</button>
 </div>
 
-<!-- PAGE 4 (RESTORED FINAL PAGE) -->
+<!-- PAGE 4 -->
 <div class="page" id="p4">
     <div class="teddy">🧸</div>
-
     <div class="box" id="t4"></div>
 </div>
 
@@ -152,7 +153,7 @@ setTimeout(run,speed);
 run();
 }
 
-/* TEXTS */
+/* TEXT */
 type("t1",`Happy Birthday, Zuha 🎉
 May you have a great day.
 
@@ -183,34 +184,45 @@ Thank you a lot for being my friend. I always thank God that He gave me such a k
 
 Go check my WhatsApp chat ❤️`);
 
-/* NAV */
+/* PAGE CONTROL */
 function show(id){
 document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
 document.getElementById(id).classList.add("active");
+
 if(id==="p3") burst();
 if(id==="p4") burst();
 }
 
-/* BUTTON LOGIC */
-let n1=26,y1=26;
-document.getElementById("p1yes").onclick=()=>show("p2");
+/* ENSURE EVERYTHING LOADS PROPERLY */
+window.onload = function () {
 
-document.getElementById("p1no").onclick=()=>{
-n1-=2; y1+=3;
-document.getElementById("p1no").style.fontSize=n1+"px";
-document.getElementById("p1yes").style.fontSize=y1+"px";
+    document.getElementById("p1yes").onclick = () => show("p2");
+
+    document.getElementById("p1no").onclick = () => {
+        let n = parseInt(document.getElementById("p1no").style.fontSize || 24);
+        let y = parseInt(document.getElementById("p1yes").style.fontSize || 24);
+
+        document.getElementById("p1no").style.fontSize = (n - 2) + "px";
+        document.getElementById("p1yes").style.fontSize = (y + 3) + "px";
+    };
+
+    document.getElementById("p2yes").onclick = () => show("p3");
+
+    document.getElementById("p2no").onclick = () => {
+        let n = parseInt(document.getElementById("p2no").style.fontSize || 24);
+        let y = parseInt(document.getElementById("p2yes").style.fontSize || 24);
+
+        document.getElementById("p2no").style.fontSize = (n - 2) + "px";
+        document.getElementById("p2yes").style.fontSize = (y + 3) + "px";
+    };
+
+    /* FIXED PAGE 3 → PAGE 4 */
+    document.getElementById("next").onclick = function () {
+        show("p4");
+    };
 };
 
-let n2=26,y2=26;
-document.getElementById("p2yes").onclick=()=>show("p3");
-
-document.getElementById("p2no").onclick=()=>{
-n2-=2; y2+=3;
-document.getElementById("p2no").style.fontSize=n2+"px";
-document.getElementById("p2yes").style.fontSize=y2+"px";
-};
-
-/* EFFECTS (BALANCED) */
+/* EFFECTS (CONTROLLED) */
 function create(){
 const e=document.createElement("div");
 const r=Math.random();
@@ -272,6 +284,5 @@ requestAnimationFrame(draw);
 draw();
 
 </script>
-
 </body>
 </html>
