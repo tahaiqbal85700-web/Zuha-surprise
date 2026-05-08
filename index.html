@@ -1,222 +1,292 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Zuha Surprise</title>
+<title>Happy Birthday Zuha 🎉</title>
 
 <style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background: radial-gradient(circle at top,#ff66b3,#ff1a75);
-  color:white;
-  overflow:hidden;
-  height:100vh;
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle, #ff2e7a, #b30059);
+    color: white;
 }
 
-/* PAGE SYSTEM */
-.page{
-  display:none;
-  position:absolute;
-  width:100%;
-  height:100%;
-  top:0;
-  left:0;
+/* Pages */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
 }
 
-.active{
-  display:block;
+.page.active { display: flex; }
+
+/* Teddy */
+.teddy {
+    font-size: 75px;
+    animation: float 2s infinite ease-in-out;
+}
+@keyframes float {
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
 }
 
-/* MAIN CARD */
-.card{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:92%;
-  max-width:720px;
-  background:rgba(0,0,0,0.25);
-  padding:40px;
-  border-radius:25px;
-  backdrop-filter:blur(8px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.35);
-  text-align:center;
+/* Box */
+.box {
+    background: rgba(0,0,0,0.55);
+    padding: 25px;
+    border-radius: 18px;
+    max-width: 85%;
+    font-size: 22px;
+    line-height: 1.6;
+    backdrop-filter: blur(8px);
 }
 
-/* TEXT */
-h1{
-  font-size:58px;
-  font-weight:900;
-  margin-bottom:10px;
+/* Buttons */
+.btn {
+    padding: 12px 26px;
+    margin: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.yes { background: #22c55e; color: white; }
+.no { background: #ef4444; color: white; }
+.next { background: #3b82f6; color: white; }
+
+.btn:active { transform: scale(0.9); }
+
+/* Floating effects */
+.heart, .sparkle, .glow {
+    position: absolute;
+    top: -10px;
+    pointer-events: none;
 }
 
-h2{
-  font-size:42px;
+.heart {
+    color: #ff004c;
+    font-size: 18px;
+    animation: fall 4s linear infinite;
 }
 
-p{
-  font-size:28px;
-  line-height:1.8;
+.sparkle {
+    color: white;
+    font-size: 10px;
+    animation: fall 5s linear infinite;
 }
 
-/* BUTTONS */
-.btn{
-  padding:16px 32px;
-  margin:12px;
-  border:none;
-  border-radius:35px;
-  font-size:22px;
-  font-weight:bold;
-  cursor:pointer;
+.glow {
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    animation: fall 6s linear infinite;
+    opacity: 0.6;
 }
 
-.next{background:#ff4d4d;color:white;}
-.yes{background:#00c853;color:white;}
-
-/* SAFE AREA FOR PAGE 2 BUTTONS */
-.btn-area{
-  margin-top:40px;
-  height:140px;
-  position:relative;
+@keyframes fall {
+    0% { transform: translateY(-10px); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
 }
 
-/* NO BUTTON (ONLY MOVING ELEMENT) */
-.no{
-  background:#ff1744;
-  color:white;
-  position:absolute;
-  left:60%;
-  top:40px;
-  z-index:999;
-}
-
-/* HEARTS */
-.heart{
-  position:absolute;
-  top:-10px;
-  font-size:26px;
-  animation:fall linear infinite;
-  opacity:0.7;
-  z-index:0;
-}
-
-@keyframes fall{
-  0%{transform:translateY(0);}
-  100%{transform:translateY(110vh);}
+/* Confetti canvas */
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
 }
 </style>
 </head>
 
 <body>
 
+<canvas id="confetti"></canvas>
+
+<!-- MUSIC -->
+<audio id="bgm" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a1f7b5.mp3?filename=romantic-music-ambient-110397.mp3">
+</audio>
+
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-  <div class="card">
-    <h1>💖 Something Special</h1>
-    <p>A surprise made just for you…</p>
-    <button class="btn next" onclick="go(2)">Next →</button>
-  </div>
+    <div class="teddy">🧸</div>
+    <div class="box" id="t1"></div>
+
+    <div>
+        <button class="btn yes" id="p1yes">Yes</button>
+        <button class="btn no" id="p1no">No</button>
+    </div>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
-  <div class="card">
-    <h1>🧸 Welcome Zuha</h1>
-    <p>Answer honestly</p>
+    <div class="teddy">🧸</div>
+    <div class="box" id="t2"></div>
 
-    <h2>Do you love Taha Iqbal?</h2>
-
-    <div class="btn-area">
-      <button class="btn yes" onclick="go(3)">Yes 💚</button>
-      <button class="btn no" id="noBtn">No 💔</button>
+    <div>
+        <button class="btn yes" id="p2yes">Yes</button>
+        <button class="btn no" id="p2no">No</button>
     </div>
-  </div>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-  <div class="card">
-    <h1>🎉 YAAAHHOOOOO!</h1>
-    <p>I knew it 😘💖</p>
-    <p>Love you too my love 🥰💋❤️</p>
-    <button class="btn next" onclick="go(4)">Next →</button>
-  </div>
+    <div class="teddy">🧸</div>
+    <div class="box" id="t3"></div>
+    <button class="btn next" id="next">Next →</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-  <div class="card">
-    <h2>💌 Message For You</h2>
-
-    <p style="text-align:left; font-size:22px;">
-Syeda Zuha Zaidi,<br><br>
-
-I don’t know how deeply I want the person with this name to always be happy in her life. She is my best friend and will always remain my favourite person. I just want her to keep smiling always. I miss the child behind this beautiful face. I know we don’t talk every day because life keeps us busy, but still, you are and will always be my closest and most special friend.<br><br>
-
-You and I are a real example of “Ek larka aur larki dost reh sakte hain”. Whenever you need me, I’ll always be there — just a text away, always in the front row for you.<br><br>
-
-I know I hurt you many times, but believe me, that was my stupidity, not intentional. I truly hope you forgive me.
-    </p>
-
-    <button class="btn next" onclick="go(5)">Next →</button>
-  </div>
-</div>
-
-<!-- PAGE 5 -->
-<div class="page" id="p5">
-  <div class="card">
-    <h1>🎁 Your Gift</h1>
-    <p>Your gift is waiting for you</p>
-    <p>Check my chat 💬</p>
-    <h2>Goodbye ❤️</h2>
-  </div>
+    <div class="teddy">🧸</div>
+    <div class="box" id="t4"></div>
 </div>
 
 <script>
 
-/* PAGE SWITCH */
-function go(n){
-  for(let i=1;i<=5;i++){
-    document.getElementById("p"+i).classList.remove("active");
-  }
-  document.getElementById("p"+n).classList.add("active");
+/* ================= MUSIC START ================= */
+window.addEventListener("click", () => {
+    document.getElementById("bgm").play();
+}, { once: true });
+
+/* ================= TYPEWRITER ================= */
+function typeText(id, text, speed=20){
+    let i=0;
+    function run(){
+        if(i<text.length){
+            document.getElementById(id).innerHTML += text.charAt(i);
+            i++;
+            setTimeout(run, speed);
+        }
+    }
+    run();
 }
 
-/* FIXED NO BUTTON LOGIC (NO OVERLAP + NO VANISH) */
-const noBtn = document.getElementById("noBtn");
+/* PAGE TEXTS */
+typeText("t1",
+`Happy Birthday, Zuha 🎉
+May you have a great day.
 
-if(noBtn){
+Taha wants to tell you something special.
+Do you want to see it?`);
 
-  const area = document.querySelector(".btn-area");
+typeText("t2",
+`Before moving to the surprise, answer a simple question:
 
-  noBtn.addEventListener("mouseenter", moveNo);
+Do you love Taha Iqbal?`);
 
-  function moveNo(){
+typeText("t3",
+`Yaahooooooo! 🎉
+I knew it!
+Love you too, baby 😚💋`);
 
-    const maxX = area.offsetWidth - noBtn.offsetWidth;
-    const maxY = area.offsetHeight - noBtn.offsetHeight;
+typeText("t4",
+`Syeda Zuha Zaidi, my first female friend in the whole university.
 
-    const x = Math.max(0, Math.random() * maxX);
-    const y = Math.max(0, Math.random() * maxY);
+She is still my best friend.
 
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-  }
+No one has the right to take her place in my life because she has been loyal to me from day one.
+
+I consider her the most courageous girl I have ever met.
+
+We may be busy, but our bond is still strong.
+
+I want you to be my friend till my last breath.
+
+Thank you a lot for being my friend. I always thank God that He gave me a kind, caring, and beautiful friend like you.
+
+Time for the surprise. Go and check my chat ❤️`);
+
+/* ================= PAGE NAV ================= */
+function show(id){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+
+    if(id==="p3") burst();
+    if(id==="p4") burst();
 }
 
-/* HEARTS */
-setInterval(()=>{
-  const h=document.createElement("div");
-  h.classList.add("heart");
-  h.innerHTML=Math.random()>0.5?"❤️":"✨";
-  h.style.left=Math.random()*window.innerWidth+"px";
-  h.style.animationDuration=(3+Math.random()*3)+"s";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
-},180);
+/* ================= BUTTON LOGIC ================= */
+let no1=18, yes1=18;
+document.getElementById("p1yes").onclick=()=>show("p2");
+
+document.getElementById("p1no").onclick=()=>{
+    no1-=2; yes1+=3;
+    document.getElementById("p1no").style.fontSize=no1+"px";
+    document.getElementById("p1yes").style.fontSize=yes1+"px";
+};
+
+let no2=18, yes2=18;
+document.getElementById("p2yes").onclick=()=>show("p3");
+
+document.getElementById("p2no").onclick=()=>{
+    no2-=2; yes2+=3;
+    document.getElementById("p2no").style.fontSize=no2+"px";
+    document.getElementById("p2yes").style.fontSize=yes2+"px";
+};
+
+document.getElementById("next").onclick=()=>show("p4");
+
+/* ================= FLOATING EFFECTS ================= */
+function create(){
+    const e=document.createElement("div");
+    const type=Math.random();
+    if(type<0.4) e.className="heart";
+    else if(type<0.7) e.className="sparkle";
+    else e.className="glow";
+
+    e.innerHTML= type<0.4?"❤":"✦";
+    e.style.left=Math.random()*100+"vw";
+    e.style.animationDuration=(3+Math.random()*3)+"s";
+
+    document.body.appendChild(e);
+    setTimeout(()=>e.remove(),6000);
+}
+setInterval(create,200);
+
+/* ================= CONFETTI ================= */
+const canvas=document.getElementById("confetti");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let pieces=[];
+
+function burst(){
+    for(let i=0;i<120;i++){
+        pieces.push({
+            x:canvas.width/2,
+            y:canvas.height/2,
+            vx:(Math.random()-0.5)*8,
+            vy:(Math.random()-0.5)*8,
+            alpha:1
+        });
+    }
+}
+
+function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+        ctx.fillStyle="rgba(255,255,255,"+p.alpha+")";
+        ctx.fillRect(p.x,p.y,4,4);
+        p.x+=p.vx;
+        p.y+=p.vy;
+        p.alpha-=0.01;
+    });
+    pieces=pieces.filter(p=>p.alpha>0);
+    requestAnimationFrame(draw);
+}
+draw();
 
 </script>
-
 </body>
 </html>
