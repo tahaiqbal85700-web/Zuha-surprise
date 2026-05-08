@@ -5,22 +5,15 @@
 <title>Happy Birthday Zuha 🎉</title>
 
 <style>
-/* =======================
-   GLOBAL BACKGROUND
-======================= */
 body {
     margin: 0;
     overflow: hidden;
     font-family: 'Segoe UI', sans-serif;
-
-    /* DARK ROMANTIC THEME */
     background: radial-gradient(circle at top, #2a0014, #000000);
     color: white;
 }
 
-/* =======================
-   PAGE SYSTEM
-======================= */
+/* PAGES */
 .page {
     position: absolute;
     width: 100%;
@@ -33,13 +26,9 @@ body {
     padding: 20px;
 }
 
-.page.active {
-    display: flex;
-}
+.page.active { display: flex; }
 
-/* =======================
-   TEDDY
-======================= */
+/* TEDDY */
 .teddy {
     font-size: 100px;
     animation: float 2.5s ease-in-out infinite;
@@ -51,24 +40,17 @@ body {
     50% { transform: translateY(-15px); }
 }
 
-/* =======================
-   TEXT BOX (BIG & CLEAR)
-======================= */
+/* TEXT BOX */
 .box {
     background: rgba(0,0,0,0.75);
     padding: 35px 40px;
     border-radius: 22px;
     max-width: 85%;
-
-    font-size: 32px;   /* BIG TEXT FIX */
+    font-size: 32px;
     line-height: 1.8;
-
-    backdrop-filter: blur(10px);
 }
 
-/* =======================
-   BUTTONS (LARGE & PREMIUM)
-======================= */
+/* BUTTONS */
 .btn {
     padding: 18px 40px;
     margin: 14px;
@@ -80,32 +62,14 @@ body {
     font-weight: bold;
 }
 
-.yes {
-    background: linear-gradient(45deg,#22c55e,#16a34a);
-    color: white;
-}
+.yes { background: #22c55e; color: white; }
+.no { background: #ef4444; color: white; }
+.next { background: #3b82f6; color: white; }
 
-.no {
-    background: linear-gradient(45deg,#ef4444,#b91c1c);
-    color: white;
-}
+.btn:active { transform: scale(0.9); }
+.btn:hover { transform: scale(1.05); }
 
-.next {
-    background: linear-gradient(45deg,#3b82f6,#1d4ed8);
-    color: white;
-}
-
-.btn:active {
-    transform: scale(0.9);
-}
-
-.btn:hover {
-    transform: scale(1.05);
-}
-
-/* =======================
-   FALLING EFFECTS (CONTROLLED)
-======================= */
+/* FALLING EFFECTS */
 .heart, .sparkle, .diamond, .star {
     position: absolute;
     top: -20px;
@@ -113,31 +77,10 @@ body {
     animation: fall linear infinite;
 }
 
-/* HEART */
-.heart {
-    font-size: 32px;
-    color: #ff004c;
-}
-
-/* SPARKLE */
-.sparkle {
-    font-size: 24px;
-    color: white;
-}
-
-/* DIAMOND */
-.diamond {
-    font-size: 26px;
-    color: #7dd3fc;
-    text-shadow: 0 0 10px #38bdf8;
-}
-
-/* STAR */
-.star {
-    font-size: 28px;
-    color: #fde047;
-    text-shadow: 0 0 10px #facc15;
-}
+.heart { font-size: 32px; color: #ff004c; }
+.sparkle { font-size: 24px; color: white; }
+.diamond { font-size: 26px; color: #7dd3fc; }
+.star { font-size: 28px; color: #fde047; }
 
 @keyframes fall {
     0% { transform: translateY(-20px); opacity: 1; }
@@ -187,9 +130,10 @@ canvas {
     <button class="btn next" id="next">Next →</button>
 </div>
 
-<!-- PAGE 4 -->
+<!-- PAGE 4 (RESTORED FINAL PAGE) -->
 <div class="page" id="p4">
     <div class="teddy">🧸</div>
+
     <div class="box" id="t4"></div>
 </div>
 
@@ -208,7 +152,7 @@ setTimeout(run,speed);
 run();
 }
 
-/* TEXT CONTENT */
+/* TEXTS */
 type("t1",`Happy Birthday, Zuha 🎉
 May you have a great day.
 
@@ -239,7 +183,7 @@ Thank you a lot for being my friend. I always thank God that He gave me such a k
 
 Go check my WhatsApp chat ❤️`);
 
-/* NAVIGATION */
+/* NAV */
 function show(id){
 document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
 document.getElementById(id).classList.add("active");
@@ -266,7 +210,7 @@ document.getElementById("p2no").style.fontSize=n2+"px";
 document.getElementById("p2yes").style.fontSize=y2+"px";
 };
 
-/* CONTROLLED EFFECT GENERATOR */
+/* EFFECTS (BALANCED) */
 function create(){
 const e=document.createElement("div");
 const r=Math.random();
@@ -291,7 +235,6 @@ document.body.appendChild(e);
 setTimeout(()=>e.remove(),9000);
 }
 
-/* 🔥 REDUCED DENSITY (IMPORTANT FIX) */
 setInterval(create, 250);
 
 /* CONFETTI */
